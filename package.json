@@ -3,23 +3,24 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --recursive test",
+    "server": "http-server src"
   },
   "author": "Mai Eaksen",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
+    "http-server": "^0.11.1",
     "lodash": "^4.17.11",
     "mongoose": "^5.4.20",
+    "puppeteer": "^1.14.0",
     "request": "^2.88.0"
   },
   "description": "Mai_Thai Kitchen Blog Application",
   "devDependencies": {
-    "mocha": "^6.0.2"
-  },
-  "scripts": {
-    "test": "mocha"
+    "mocha": "^6.1.2"
   }
 }
