@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>JQuery Ajax</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="/ajaxScripts/loadBlogJSON.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <h3>Ajax load blog post</h3>
+    <div class="container-fluid">
+      <form id="postForm" style="text-align:left;" class="" action="/ajaxLoadPost" method="post">
+        <div class="form-group">
+          <h3>Blog Title</h3>
+          <input class="form-control" type="text" name="postTitle">
+        </div>
+        <div class="form-group">
+          <h3>Blog Content</h3>
+          <textarea class="form-control" name="postContent" cols="40" rows="5"></textarea>
+        </div>
+        <button id="composeBlog" type="submit" class="btn btn-primary" name="button">Post Blog</button>
+        <button type="reset" name="cancel" class="btn btn-danger">Cancel</button>
+      </form>
+    </div>
+    <div id="getResultDiv">
+      <%if (posts) { %>
+      <%  posts.forEach(function(post){ %>
+      <ul class="list-group">
+        <h2 id="postTitle">
+          <%=post.title%>
+        </h2>
+      </ul>
+
+      <% }) %>
+      <% } %>
+    </div>
+  </div>
+
+</body>
+
+</html>
