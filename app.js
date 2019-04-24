@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 //setup mongoDB to port 27017
-mongoose.connect("mongodb://localhost:27017/MaiThaiBlog", {useNewUrlParser: true});
+mongoose.connect("mongodb+srv://admin-mai:Mai_123456@cluster0-wqtye.mongodb.net/MaiThaiBlog", {useNewUrlParser: true});
 //create global variables
 // posts is an array of post object which has 2 key-value pairs
 // 1. title (key) : req.body.postTitle (value)
@@ -74,42 +74,19 @@ app.get("/blog", function(req, res) {
   });
 });
 
-//////////////////////////AJAX calls
-app.route("/ajaxLoadPost")
-    .get(function(req, res){
-      // res.render("ajaxLoadPost");
+//////////////////////////AJAX calls//////////////////
+app.get('/ajaxCall',function(req,res){
+      res.render("ajaxLoadPost");
+});
 
-      Post.find({}, function(err, posts){
-        //send the response back to client
-        if(!err){
-        res.render("ajaxLoadPost", {
-          posts: posts
-          });
-        }else{
-          res.send(err);
-        }
-      });
-    })
-  //POST verb to CREATE data on the database from client
-    .post(function(req, res){
-      debugger;
-      //create data inside mongoDB
-      console.log(req.body.postContent);
-      console.log(req.body.postTitle);
-      const post = new Post({
-        //body parser to retrieve data from database
-        title: req.body.postTitle,
-        content: req.body.postContent
-      });
-      //save data on the mongoDB
-      post.save(function(err){
-        if (!err){
-          console.log("Successfully added a new articles.");
-        }else{
-          console.log("Error to save data in mongoDB")
-        }
-      });
+app.get('/ajaxCalljson',function(req,res){
+  Post.find({},function(err,posts){
+    if(!err){
+      console.log(posts);
+      res.send(posts);
+    }
   });
+});
 
 //////////////////////////Compose Blogs//////////////////////////////
 //app.get("/compose", );
@@ -148,6 +125,9 @@ const requestedPostId = req.params.postId;
   Post.findOne({_id: requestedPostId}, function(err, foundPost){
     if(foundPost){
       res.render("foundPost", {
+        //key:value pair
+        //key is variable on the ejs template and value is variable this app.js
+        //in this case, value foundPost.title is what retrieved from MongoDB
         title: foundPost.title,
         content: foundPost.content,
         id: foundPost._id,
@@ -237,7 +217,6 @@ app.post("/signUp", function(req, res) {
   };
 
   var jsonData = JSON.stringify(data);
-
   var options = {
     //url that we want to send our request to
     url: "https://us20.api.mailchimp.com/3.0/lists/e5ca79f9d5",
@@ -250,7 +229,6 @@ app.post("/signUp", function(req, res) {
     //content of the data
     body: jsonData
   };
-
   request(options, function(error, response, body) {
     if (error) {
       //console.log(error);

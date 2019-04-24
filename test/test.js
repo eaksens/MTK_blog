@@ -6,7 +6,7 @@ var assert = require('assert'),
 const { expect } = require('chai');
 
 //Test the server 200
-describe("Unit test for Mai_Thai Kitchen server", function() {
+describe("Test1: for Mai_Thai Kitchen server", function() {
       //it function to write what you expect
     it("should return status code of 200", function(done)
     {
@@ -19,8 +19,8 @@ describe("Unit test for Mai_Thai Kitchen server", function() {
     })
   });
 
-  describe('sample test', function () {
+/*  describe('sample test', function () {
     it('should work', function () {
       expect(true).to.be.true;
     });
-  });
+  });*/
